@@ -1,0 +1,7 @@
+[build]
+  base = "meme-hub-web"
+  publish = "meme-hub-web/dist"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "20"
