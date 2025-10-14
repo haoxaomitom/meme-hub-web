@@ -40,7 +40,11 @@ const Navbar = () => {
             >
               Top Contributors
             </a>
-            <Button title={"Upload"} icon={<Upload size={18} />} />
+            <Button
+              title={"Upload"}
+              icon={<Upload size={18} />}
+              onClick={() => navigate("/upload")}
+            />
             <button
               onClick={() => navigate("/auth")}
               className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center hover:bg-pink-200 transition-colors"

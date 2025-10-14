@@ -70,7 +70,10 @@ const HeaderBar = () => {
             {openDropdown && (
               <div className="absolute right-0 mt-3 w-44 bg-white rounded-xl shadow-lg border border-pink-100 overflow-hidden animate-fadeIn">
                 <ul className="text-sm text-gray-700">
-                  <li className="px-4 py-2 hover:bg-pink-50 flex items-center gap-2 cursor-pointer">
+                  <li
+                    onClick={() => navigate("/profile")}
+                    className="px-4 py-2 hover:bg-pink-50 flex items-center gap-2 cursor-pointer"
+                  >
                     <User size={16} className="text-pink-500" /> Profile
                   </li>
                   <li className="px-4 py-2 hover:bg-pink-50 flex items-center gap-2 cursor-pointer">
@@ -101,7 +104,10 @@ const HeaderBar = () => {
           {!showSearch && openDropdown && (
             <div className=" absolute right-0 mt-10 w-44 bg-white rounded-xl shadow-lg border border-pink-100 overflow-hidden animate-fadeIn">
               <ul className="text-sm text-gray-700">
-                <li className="px-4 py-2 hover:bg-pink-50 flex items-center gap-2 cursor-pointer">
+                <li
+                  onClick={() => navigate("/profile")}
+                  className="px-4 py-2 hover:bg-pink-50 flex items-center gap-2 cursor-pointer"
+                >
                   <User size={16} className="text-pink-500" /> Profile
                 </li>
                 <li className="px-4 py-2 hover:bg-pink-50 flex items-center gap-2 cursor-pointer">
