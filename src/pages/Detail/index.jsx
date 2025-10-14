@@ -7,6 +7,7 @@ import MemeComments from "./MemeComments";
 import ExploreMemeList from "./ExploreMemeList";
 import { useState } from "react";
 
+
 const MemeDetailPage = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");

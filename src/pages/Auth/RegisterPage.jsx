@@ -10,8 +10,10 @@ import {
   Check,
   X,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -44,6 +46,7 @@ const RegisterPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Registration submitted:", formData);
+    navigate("/auth/otp-verify");
   };
 
   const ValidationItem = ({ isValid, text }) => (
