@@ -5,6 +5,8 @@ import Contact from "../../pages/Contact/index";
 import ProfilePage from "../../pages/Profile";
 import MemeDetailPage from "../../pages/Detail";
 import UploadMemePage from "../../pages/UploadMeme";
+import DiscoverPage from "../../pages/Discover/Discover";
+
 
 const homeRoutes = [
   {
@@ -17,6 +19,7 @@ const homeRoutes = [
       { path: "profile", element: <ProfilePage /> },
       { path: "meme-detail", element: <MemeDetailPage /> },
       { path: "upload", element: <UploadMemePage /> },
+      { path: "discover", element: <DiscoverPage /> },
     ],
   },
 ];

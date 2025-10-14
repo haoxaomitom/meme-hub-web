@@ -23,20 +23,32 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             <a
+              onClick={() => navigate("/")}
+              className="text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
+            >
+              Home
+            </a>
+            <a
               href="#"
-              className="text-gray-700 hover:text-pink-500 transition-colors font-medium"
+              className="text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
             >
               Trending
             </a>
             <a
+              onClick={() => navigate("/discover")}
+              className="text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
+            >
+              Discover
+            </a>
+            <a
               href="#"
-              className="text-gray-700 hover:text-pink-500 transition-colors font-medium"
+              className="text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
             >
               Categories
             </a>
             <a
               href="#"
-              className="text-gray-700 hover:text-pink-500 transition-colors font-medium"
+              className="text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
             >
               Top Contributors
             </a>
@@ -66,24 +78,41 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 space-y-3">
             <a
+              onClick={() => navigate("/")}
               href="#"
-              className="block text-gray-700 hover:text-pink-500 transition-colors font-medium"
+              className="block text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
+            >
+              Home
+            </a>
+            <a
+              href="#"
+              className="block text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
             >
               Trending
             </a>
             <a
+              onClick={() => navigate("/discover")}
               href="#"
-              className="block text-gray-700 hover:text-pink-500 transition-colors font-medium"
+              className="block text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
+            >
+              Discover
+            </a>
+            <a
+              href="#"
+              className="block text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
             >
               Categories
             </a>
             <a
               href="#"
-              className="block text-gray-700 hover:text-pink-500 transition-colors font-medium"
+              className="block text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
             >
               Top Contributors
             </a>
-            <button className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-2 rounded-full">
+            <button
+              onClick={() => navigate("/upload")}
+              className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-2 rounded-full"
+            >
               Upload Meme
             </button>
           </div>
