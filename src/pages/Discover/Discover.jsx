@@ -106,7 +106,6 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 // Main Discover Page Component
 const DiscoverPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState("trending");
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 12;
 
@@ -232,13 +231,6 @@ const DiscoverPage = () => {
       views: "29.8K",
       isTrending: false,
     },
-  ];
-
-  const filters = [
-    { id: "trending", label: "Trending", icon: TrendingUp },
-    { id: "recent", label: "Recent", icon: Clock },
-    { id: "popular", label: "Most Popular", icon: Heart },
-    { id: "featured", label: "Featured", icon: Sparkles },
   ];
 
   return (

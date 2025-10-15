@@ -6,6 +6,7 @@ import ProfilePage from "../../pages/Profile";
 import MemeDetailPage from "../../pages/Detail";
 import UploadMemePage from "../../pages/UploadMeme";
 import DiscoverPage from "../../pages/Discover/Discover";
+import TrendingPage from "../../pages/Trending/TrendingPage";
 
 
 const homeRoutes = [
@@ -20,6 +21,7 @@ const homeRoutes = [
       { path: "meme-detail", element: <MemeDetailPage /> },
       { path: "upload", element: <UploadMemePage /> },
       { path: "discover", element: <DiscoverPage /> },
+      { path: "trending", element: <TrendingPage /> }
     ],
   },
 ];
