@@ -20,6 +20,7 @@ import {
   Search,
 } from "lucide-react";
 import Footer from "../../components/Footer";
+import Navbar from "../../components/Navbar";
 
 const ProfilePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -107,6 +108,7 @@ const ProfilePage = () => {
 
   return (
     <div className="relative bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100 min-h-screen text-gray-800 overflow-hidden">
+      <Navbar/>
       <FloatingEmojis />
 
       <main className="pt-8 pb-20 max-w-6xl mx-auto px-4 md:px-8">
@@ -251,6 +253,9 @@ const ProfilePage = () => {
             ))}
           </div>
         </motion.div>
+
+        {/* Pagination */}
+        <Pagination totalPages={12} currentPage={1} />
       </main>
 
       {/* Modals */}
@@ -268,9 +273,6 @@ const ProfilePage = () => {
           />
         )}
       </AnimatePresence>
-
-      {/* Pagination */}
-      <Pagination />
 
       {/* Footer */}
       <Footer />

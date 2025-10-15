@@ -11,76 +11,7 @@ import {
 } from "lucide-react";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
-
-// Filter Chip Component
-const FilterChip = ({ label, isActive, onClick, icon: Icon }) => {
-  return (
-    <button
-      onClick={onClick}
-      className={`flex items-center space-x-2 px-5 py-2.5 rounded-full font-medium transition-all duration-200 ${
-        isActive
-          ? "bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg scale-105"
-          : "bg-white text-gray-700 border-2 border-gray-200 hover:border-pink-300 hover:bg-pink-50"
-      }`}
-    >
-      {Icon && <Icon size={18} />}
-      <span>{label}</span>
-    </button>
-  );
-};
-
-// Meme Card Component
-const MemeCard = ({ meme, onClick }) => {
-  return (
-    <div
-      onClick={onClick}
-      className="relative overflow-hidden rounded-2xl group cursor-pointer aspect-square bg-gray-100"
-    >
-      <img
-        src={meme.image}
-        alt={meme.title}
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-      />
-
-      {/* Overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div className="absolute bottom-0 left-0 right-0 p-5 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-          <h3 className="text-white font-bold text-base mb-3 line-clamp-2">
-            {meme.title}
-          </h3>
-          <div className="flex items-center justify-between text-white/90 text-sm">
-            <div className="flex items-center space-x-3">
-              <div className="flex items-center space-x-1">
-                <Eye size={16} />
-                <span>{meme.views}</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                <Heart size={16} />
-                <span>{meme.likes}</span>
-              </div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <img
-                src={meme.authorAvatar}
-                alt={meme.author}
-                className="w-6 h-6 rounded-full border-2 border-white"
-              />
-              <span className="font-medium">{meme.author}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Trending Badge */}
-      {meme.isTrending && (
-        <div className="absolute top-3 right-3 bg-gradient-to-r from-pink-500 to-orange-500 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center space-x-1 shadow-lg">
-          <TrendingUp size={14} />
-          <span>Hot</span>
-        </div>
-      )}
-    </div>
-  );
-};
+import MemeCard from "../../components/MemeCard";
 
 // Pagination Component
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
@@ -342,23 +273,6 @@ const DiscoverPage = () => {
                 className="w-full pl-14 pr-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-pink-400 focus:outline-none transition-all text-base shadow-sm"
               />
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Filters Section */}
-      <div className="sticky top-16 z-40 bg-white/90 backdrop-blur-xl border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-          <div className="flex items-center space-x-3 overflow-x-auto scrollbar-hide pb-1">
-            {filters.map((filter) => (
-              <FilterChip
-                key={filter.id}
-                label={filter.label}
-                icon={filter.icon}
-                isActive={activeFilter === filter.id}
-                onClick={() => setActiveFilter(filter.id)}
-              />
-            ))}
           </div>
         </div>
       </div>

@@ -29,7 +29,7 @@ const Navbar = () => {
               Home
             </a>
             <a
-              href="#"
+              onClick={() => navigate("/trending")}
               className="text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
             >
               Trending
@@ -39,12 +39,6 @@ const Navbar = () => {
               className="text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
             >
               Discover
-            </a>
-            <a
-              href="#"
-              className="text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
-            >
-              Categories
             </a>
             <a
               href="#"
@@ -85,6 +79,7 @@ const Navbar = () => {
               Home
             </a>
             <a
+              onClick={() => navigate("/trending")}
               href="#"
               className="block text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
             >
@@ -101,12 +96,6 @@ const Navbar = () => {
               href="#"
               className="block text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
             >
-              Categories
-            </a>
-            <a
-              href="#"
-              className="block text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
-            >
               Top Contributors
             </a>
             <button
@@ -114,6 +103,12 @@ const Navbar = () => {
               className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-2 rounded-full"
             >
               Upload Meme
+            </button>
+            <button
+              onClick={() => navigate("/auth")}
+              className="w-full bg-pink-100 text-pink-600 px-6 py-2 rounded-full flex items-center justify-center hover:bg-pink-200 transition-colors"
+            >
+              <User size={20} />
             </button>
           </div>
         )}

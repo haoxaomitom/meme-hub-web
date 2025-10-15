@@ -1,54 +1,54 @@
-import { Heart } from "lucide-react";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Eye, Heart, TrendingUp } from "lucide-react";
 
-const MemeCard = ({ meme }) => {
-  const [isLiked, setIsLiked] = useState(false);
-  const navigate = useNavigate();
-
+// Meme Card Component
+const MemeCard = ({ meme, onClick }) => {
   return (
     <div
-      onClick={() => navigate("/meme-detail")}
-      className="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group"
+      onClick={onClick}
+      className="relative overflow-hidden rounded-2xl group cursor-pointer aspect-square bg-gray-100"
     >
-      <div className="relative overflow-hidden aspect-square">
-        <img
-          src={meme.image}
-          alt={meme.title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-          <div className="absolute bottom-4 left-4 right-4">
-            <h3 className="text-white font-semibold text-lg mb-1">
-              {meme.title}
-            </h3>
-            <p className="text-white/80 text-sm">{meme.views} views</p>
+      <img
+        src={meme.image}
+        alt={meme.title}
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+      />
+
+      {/* Overlay on hover */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute bottom-0 left-0 right-0 p-5 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+          <h3 className="text-white font-bold text-base mb-3 line-clamp-2">
+            {meme.title}
+          </h3>
+          <div className="flex items-center justify-between text-white/90 text-sm">
+            <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-1">
+                <Eye size={16} />
+                <span>{meme.views}</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <Heart size={16} />
+                <span>{meme.likes}</span>
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <img
+                src={meme.authorAvatar}
+                alt={meme.author}
+                className="w-6 h-6 rounded-full border-2 border-white"
+              />
+              <span className="font-medium">{meme.author}</span>
+            </div>
           </div>
         </div>
       </div>
-      <div className="p-4 flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <img
-            src={meme.authorAvatar}
-            alt={meme.author}
-            className="w-8 h-8 rounded-full"
-          />
-          <span className="text-sm font-medium text-gray-700">
-            {meme.author}
-          </span>
+
+      {/* Trending Badge */}
+      {meme.isTrending && (
+        <div className="absolute top-3 right-3 bg-gradient-to-r from-pink-500 to-orange-500 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center space-x-1 shadow-lg">
+          <TrendingUp size={14} />
+          <span>Hot</span>
         </div>
-        <button
-          onClick={() => setIsLiked(!isLiked)}
-          className={`flex items-center space-x-1 transition-colors ${
-            isLiked ? "text-pink-500" : "text-gray-400 hover:text-pink-500"
-          }`}
-        >
-          <Heart size={20} fill={isLiked ? "currentColor" : "none"} />
-          <span className="text-sm font-medium">
-            {meme.likes + (isLiked ? 1 : 0)}
-          </span>
-        </button>
-      </div>
+      )}
     </div>
   );
 };
