@@ -41,6 +41,7 @@ const Navbar = () => {
               Discover
             </a>
             <a
+              onClick={() => navigate("/top-contributors")}
               href="#"
               className="text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
             >
@@ -93,6 +94,7 @@ const Navbar = () => {
               Discover
             </a>
             <a
+              onClick={() => navigate("/top-contributors")}
               href="#"
               className="block text-gray-700 hover:text-pink-500 transition-colors font-medium cursor-pointer"
             >
