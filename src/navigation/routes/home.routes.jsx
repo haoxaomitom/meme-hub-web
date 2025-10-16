@@ -18,7 +18,6 @@ const homeRoutes = [
     children: [
       { index: true, element: <Home /> },
       { path: "about", element: <About /> },
-      { path: "contact", element: <Contact /> },
       { path: "profile", element: <ProfilePage /> },
       { path: "meme-detail", element: <MemeDetailPage /> },
       { path: "upload", element: <UploadMemePage /> },
