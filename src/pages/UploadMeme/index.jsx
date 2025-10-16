@@ -53,21 +53,17 @@ const UploadMemePage = () => {
   const handleTagInputChange = (e) => {
     const value = e.target.value;
     
+    // Kiểm tra nếu có dấu phẩy
     if (value.includes(",")) {
       const newTags = value
         .split(",")
         .map((tag) => tag.trim())
-        .filter((tag) => tag !== "");
+        .filter((tag) => tag !== "" && !tags.includes(tag)); // Lọc tag trống và trùng lặp
       
       if (newTags.length > 0) {
-        const lastTag = newTags[newTags.length - 1];
-        const tagsToAdd = newTags.slice(0, -1);
-        
-        setTags((prev) => [...prev, ...tagsToAdd]);
-        setTagInput(lastTag);
-      } else {
-        setTagInput("");
+        setTags((prev) => [...prev, ...newTags]);
       }
+      setTagInput(""); // Clear input sau khi thêm tags
     } else {
       setTagInput(value);
     }
@@ -76,7 +72,9 @@ const UploadMemePage = () => {
   const handleTagInputKeyDown = (e) => {
     if (e.key === "Enter" && tagInput.trim()) {
       e.preventDefault();
-      setTags((prev) => [...prev, tagInput.trim()]);
+      if (!tags.includes(tagInput.trim())) {
+        setTags((prev) => [...prev, tagInput.trim()]);
+      }
       setTagInput("");
     } else if (e.key === "Backspace" && !tagInput && tags.length > 0) {
       setTags((prev) => prev.slice(0, -1));
@@ -101,9 +99,8 @@ const UploadMemePage = () => {
     }
 
     // Add remaining tag input if exists
-    if (tagInput.trim()) {
+    if (tagInput.trim() && !tags.includes(tagInput.trim())) {
       setTags((prev) => [...prev, tagInput.trim()]);
-      setTagInput("");
     }
 
     setShowSuccess(true);
@@ -227,38 +224,41 @@ const UploadMemePage = () => {
                 <label className="block text-lg font-semibold text-pink-600 mb-3">
                   Tags
                 </label>
-                <div className="border-2 border-pink-200 rounded-2xl p-3 focus-within:border-pink-500 transition">
+                <div className="border-2 border-pink-200 rounded-2xl p-3 focus-within:border-pink-500 transition min-h-[60px]">
                   <div className="flex flex-wrap gap-2 mb-2">
-                    {tags.map((tag, index) => (
-                      <motion.span
-                        key={index}
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0 }}
-                        className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium"
-                      >
-                        {tag}
-                        <button
-                          type="button"
-                          onClick={() => removeTag(index)}
-                          className="hover:bg-white hover:bg-opacity-20 rounded-full transition"
+                    <AnimatePresence>
+                      {tags.map((tag, index) => (
+                        <motion.span
+                          key={index}
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          exit={{ scale: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-md"
                         >
-                          <X size={14} />
-                        </button>
-                      </motion.span>
-                    ))}
+                          #{tag}
+                          <button
+                            type="button"
+                            onClick={() => removeTag(index)}
+                            className="hover:bg-white hover:bg-opacity-20 rounded-full p-0.5 transition"
+                          >
+                            <X size={14} />
+                          </button>
+                        </motion.span>
+                      ))}
+                    </AnimatePresence>
                   </div>
                   <input
                     type="text"
                     value={tagInput}
                     onChange={handleTagInputChange}
                     onKeyDown={handleTagInputKeyDown}
-                    placeholder="Type tags and press comma or Enter..."
-                    className="w-full p-1 text-base focus:outline-none"
+                    placeholder={tags.length === 0 ? "Type tags and press comma (,) or Enter..." : "Add more tags..."}
+                    className="w-full p-1 text-base focus:outline-none placeholder:text-gray-400"
                   />
                 </div>
                 <p className="text-sm text-gray-500 mt-2">
-                  Press comma (,) or Enter to add tags. Backspace to remove.
+                  💡 Press <span className="font-semibold text-pink-600">comma (,)</span> or <span className="font-semibold text-pink-600">Enter</span> to add tags. <span className="font-semibold text-pink-600">Backspace</span> to remove last tag.
                 </p>
               </div>
 
@@ -294,8 +294,7 @@ const UploadMemePage = () => {
         )}
       </AnimatePresence>
 
-      {/* Footer Placeholder */}
-        <Footer/>
+      <Footer/>
     </div>
   );
 };
