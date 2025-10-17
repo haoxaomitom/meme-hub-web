@@ -11,6 +11,7 @@ import {
   X,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Input from "./components/Input";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -175,75 +176,35 @@ const RegisterPage = () => {
 
           {/* Registration Form */}
           <div className="space-y-4">
-            {/* Username Input */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Username
-              </label>
-              <div className="relative">
-                <User
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-                  size={20}
-                />
-                <input
-                  type="text"
-                  name="username"
-                  value={formData.username}
-                  onChange={handleChange}
-                  placeholder="Choose a unique username"
-                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-full focus:border-pink-400 focus:outline-none transition-all"
-                />
-              </div>
-            </div>
+            <Input
+              label="Username"
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              placeholder="Choose a unique username"
+              icon={User}
+            />
 
-            {/* Email Input */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
-              </label>
-              <div className="relative">
-                <Mail
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-                  size={20}
-                />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="your@email.com"
-                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-full focus:border-pink-400 focus:outline-none transition-all"
-                />
-              </div>
-            </div>
+            <Input
+              label="Email Address"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="your@email.com"
+              icon={Mail}
+            />
 
-            {/* Password Input */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <Lock
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-                  size={20}
-                />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="Create a strong password"
-                  className="w-full pl-12 pr-12 py-3 border-2 border-gray-200 rounded-full focus:border-pink-400 focus:outline-none transition-all"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-pink-500 transition-colors"
-                >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                </button>
-              </div>
-            </div>
+            <Input
+              label="Password"
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Create a strong password"
+              icon={Lock}
+            />
 
             {/* Confirm Password Input */}
             <div>
@@ -359,7 +320,10 @@ const RegisterPage = () => {
           {/* Login Link */}
           <div className="mt-6 text-center text-sm text-gray-600">
             Already have an account?{" "}
-            <button className="text-pink-500 hover:text-pink-600 font-medium">
+            <button
+              onClick={() => navigate(-1)}
+              className="text-pink-500 hover:text-pink-600 font-medium"
+            >
               Login here
             </button>
           </div>

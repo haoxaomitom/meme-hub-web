@@ -1,11 +1,5 @@
-import { useState } from "react";
-import { Search, ChevronLeft, ChevronRight } from "lucide-react";
-import Footer from "../../components/Footer";
-import Navbar from "../../components/Navbar";
-import MemeCard from "../../components/MemeCard";
-import { memes } from "../../utils/constants";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-// Pagination Component
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const getPageNumbers = () => {
     const pages = [];
@@ -95,72 +89,4 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   );
 };
 
-// Main Discover Page Component
-const DiscoverPage = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 12;
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
-      {/* Navbar Placeholder */}
-      <Navbar />
-
-      {/* Header Section */}
-      <div className="bg-white border-b border-gray-100 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="flex flex-col space-y-6">
-            <div className="text-center md:text-left">
-              <h1 className="text-5xl font-bold mb-3 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-                Discover Memes
-              </h1>
-              <p className="text-gray-600 text-lg">
-                Explore thousands of hilarious memes from our creative community
-              </p>
-            </div>
-
-            {/* Search Bar */}
-            <div className="relative max-w-2xl mx-auto md:mx-0 w-full">
-              <Search
-                className="absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400"
-                size={22}
-              />
-              <input
-                type="text"
-                placeholder="Search for memes, tags, or creators..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-14 pr-6 py-4 border-2 border-gray-200 rounded-2xl focus:border-pink-400 focus:outline-none transition-all text-base shadow-sm"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Memes Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {memes.map((meme) => (
-            <MemeCard
-              key={meme.id}
-              meme={meme}
-              onClick={() => console.log("Meme clicked:", meme.id)}
-            />
-          ))}
-        </div>
-
-        {/* Pagination */}
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
-      </div>
-
-      {/* Footer */}
-      <Footer />
-    </div>
-  );
-};
-
-export default DiscoverPage;
+export default Pagination;

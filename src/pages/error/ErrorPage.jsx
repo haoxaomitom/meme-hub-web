@@ -1,69 +1,11 @@
-import React from "react";
-import {
-  Home,
-  Search,
-  RefreshCw,
-  ArrowLeft,
-  AlertCircle,
-  Frown,
-  Flame,
-  Icon,
-} from "lucide-react";
+import { AlertCircle, Frown } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-
-
+import { ERROR_CONFIG } from "../../utils/constants";
 
 // Main Error Page Component
 const ErrorPage = ({ errorType = "404" }) => {
-  const errorConfig = {
-    404: {
-      code: "404",
-      title: "Page Not Found",
-      description: "Oops! Looks like this meme got lost in the internet void.",
-      emoji: "🤔",
-      suggestions: [
-        "The page you're looking for doesn't exist",
-        "The URL might be misspelled",
-        "The content may have been moved or deleted",
-      ],
-    },
-    500: {
-      code: "500",
-      title: "Server Error",
-      description: "Our servers are taking a coffee break. We'll be back soon!",
-      emoji: "😵",
-      suggestions: [
-        "Something went wrong on our end",
-        "Our team has been notified",
-        "Please try again in a few moments",
-      ],
-    },
-    403: {
-      code: "403",
-      title: "Access Denied",
-      description: "You don't have permission to view this content.",
-      emoji: "🚫",
-      suggestions: [
-        "This content is private or restricted",
-        "You may need to log in",
-        "Contact support if you believe this is an error",
-      ],
-    },
-    network: {
-      code: "😿",
-      title: "Connection Lost",
-      description: "Can't reach our servers. Check your internet connection.",
-      emoji: "📡",
-      suggestions: [
-        "Check your internet connection",
-        "Try disabling VPN or proxy",
-        "Refresh the page to try again",
-      ],
-    },
-  };
-
-  const config = errorConfig[errorType] || errorConfig["404"];
+  const config = ERROR_CONFIG[errorType] || ERROR_CONFIG["404"];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 flex flex-col">

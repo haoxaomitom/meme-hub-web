@@ -1,4 +1,6 @@
 import { Award } from "lucide-react";
+import { TOP_CONTRIBUTORS } from "../../../utils/constants";
+import { useState } from "react";
 
 // Card Component
 const ContributorCard = ({ contributor, rank }) => {
@@ -53,44 +55,7 @@ const ContributorCard = ({ contributor, rank }) => {
 };
 
 const TopContributors = () => {
-  const contributors = [
-    {
-      id: 1,
-      name: "Alex Johnson",
-      username: "alexj",
-      avatar:
-        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop",
-      memes: 342,
-      likes: "128K",
-    },
-    {
-      id: 2,
-      name: "Sarah Chen",
-      username: "sarahc",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
-      memes: 298,
-      likes: "95K",
-    },
-    {
-      id: 3,
-      name: "Mike Ross",
-      username: "mikeross",
-      avatar:
-        "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop",
-      memes: 276,
-      likes: "87K",
-    },
-    {
-      id: 4,
-      name: "Emma Wilson",
-      username: "emmaw",
-      avatar:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
-      memes: 254,
-      likes: "72K",
-    },
-  ];
+  const [contributors, setContributors] = useState(TOP_CONTRIBUTORS);
 
   return (
     <section className="py-16 px-4 bg-gradient-to-br from-pink-50 to-purple-50">

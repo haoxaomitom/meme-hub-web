@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Mail, Lock, Eye, EyeOff, Github, Chrome } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Input from "./components/Input";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const LoginPage = () => {
 
   const goToSignUp = () => {
     navigate("/auth/register");
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100 flex items-center justify-center p-4">
@@ -120,51 +121,24 @@ const LoginPage = () => {
           {/* Login Form */}
           <div className="space-y-4">
             {/* Email Input */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
-              </label>
-              <div className="relative">
-                <Mail
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-                  size={20}
-                />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-full focus:border-pink-400 focus:outline-none transition-all"
-                />
-              </div>
-            </div>
+            <Input
+              label="Email Address"
+              type="email"
+              placeholder="your@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              icon={Mail}
+            />
 
             {/* Password Input */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <Lock
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-                  size={20}
-                />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full pl-12 pr-12 py-3 border-2 border-gray-200 rounded-full focus:border-pink-400 focus:outline-none transition-all"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-pink-500 transition-colors"
-                >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                </button>
-              </div>
-            </div>
+            <Input
+              label="Password"
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              icon={Lock}
+            />
 
             {/* Remember & Forgot */}
             <div className="flex items-center justify-between text-sm">

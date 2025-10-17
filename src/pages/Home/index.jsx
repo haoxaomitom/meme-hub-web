@@ -1,9 +1,9 @@
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import Banner from "../../components/Banner";
-import AdSpace from "./AdSpace";
-import TopContributors from "./TopContributors";
-import FeaturedMemes from "../../components/FeaturedMemes";
+import AdSpace from "./components/AdSpace";
+import TopContributors from "./components/TopContributors";
+import FeaturedMemes from "./components/FeaturedMemes";
 
 export default function App() {
   return (

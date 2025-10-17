@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Eye,
@@ -9,106 +9,27 @@ import {
   Instagram,
   Twitter,
   Facebook,
-  MessageCircle,
   Users,
   Image,
-  ThumbsUp,
-  Clock,
   ChevronLeft,
   ChevronRight,
-  Sparkles,
-  Search,
 } from "lucide-react";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
+import { MEME_PROFILE, USER_PROFILE } from "../../utils/constants";
+import StatCard from "./components/StatCard";
+import SocialButton from "./components/SocialButton";
 
 const ProfilePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
 
-  const userProfile = {
-    name: "Sarah Johnson",
-    username: "@sarahmemes",
-    avatar: "https://picsum.photos/200/200?random=user",
-    coverImage: "https://picsum.photos/1200/400?random=cover",
-    bio: "Spreading joy through memes 🌸 | Comedy enthusiast 💕 | Making the internet laugh one meme at a time ✨",
-    followers: 12500,
-    following: 342,
-    totalMemes: 156,
-    totalLikes: 45800,
-    socialLinks: {
-      instagram: "https://instagram.com/sarahmemes",
-      twitter: "https://twitter.com/sarahmemes",
-      facebook: "https://facebook.com/sarahmemes",
-    },
-  };
-
-  const memes = [
-    {
-      id: 1,
-      title: "When Monday hits different",
-      image: "https://picsum.photos/400/400?random=1",
-      views: "2.5K",
-      likes: "1.2K",
-      author: "Sarah J.",
-      authorAvatar: "https://picsum.photos/200/200?random=user",
-      isTrending: true,
-    },
-    {
-      id: 2,
-      title: "Coffee before talkie",
-      image: "https://picsum.photos/400/400?random=2",
-      views: "3.1K",
-      likes: "1.8K",
-      author: "Sarah J.",
-      authorAvatar: "https://picsum.photos/200/200?random=user",
-      isTrending: true,
-    },
-    {
-      id: 3,
-      title: "Weekend mood activated",
-      image: "https://picsum.photos/400/400?random=3",
-      views: "1.9K",
-      likes: "950",
-      author: "Sarah J.",
-      authorAvatar: "https://picsum.photos/200/200?random=user",
-      isTrending: false,
-    },
-    {
-      id: 4,
-      title: "Me pretending to work",
-      image: "https://picsum.photos/400/400?random=4",
-      views: "4.2K",
-      likes: "2.3K",
-      author: "Sarah J.",
-      authorAvatar: "https://picsum.photos/200/200?random=user",
-      isTrending: true,
-    },
-    {
-      id: 5,
-      title: "Cat logic explained",
-      image: "https://picsum.photos/400/400?random=5",
-      views: "2.8K",
-      likes: "1.5K",
-      author: "Sarah J.",
-      authorAvatar: "https://picsum.photos/200/200?random=user",
-      isTrending: false,
-    },
-    {
-      id: 6,
-      title: "Life as a millennial",
-      image: "https://picsum.photos/400/400?random=6",
-      views: "3.5K",
-      likes: "1.9K",
-      author: "Sarah J.",
-      authorAvatar: "https://picsum.photos/200/200?random=user",
-      isTrending: false,
-    },
-  ];
+  const userProfile = USER_PROFILE;
+  const memes = MEME_PROFILE;
 
   return (
     <div className="relative bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100 min-h-screen text-gray-800 overflow-hidden">
-      <Navbar/>
+      <Navbar />
       <FloatingEmojis />
 
       <main className="pt-8 pb-20 max-w-6xl mx-auto px-4 md:px-8">
@@ -207,30 +128,21 @@ const ProfilePage = () => {
 
                 {/* Social Links */}
                 <div className="flex gap-4">
-                  <a
+                  <SocialButton
+                    icon={Instagram}
                     href={userProfile.socialLinks.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 text-white rounded-full hover:scale-110 transition-transform duration-300 shadow-lg"
-                  >
-                    <Instagram size={20} />
-                  </a>
-                  <a
+                    colorClass="bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500"
+                  />
+                  <SocialButton
+                    icon={Twitter}
                     href={userProfile.socialLinks.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center w-12 h-12 bg-blue-400 text-white rounded-full hover:scale-110 transition-transform duration-300 shadow-lg"
-                  >
-                    <Twitter size={20} />
-                  </a>
-                  <a
+                    colorClass="bg-blue-400"
+                  />
+                  <SocialButton
+                    icon={Facebook}
                     href={userProfile.socialLinks.facebook}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-full hover:scale-110 transition-transform duration-300 shadow-lg"
-                  >
-                    <Facebook size={20} />
-                  </a>
+                    colorClass="bg-blue-600"
+                  />
                 </div>
               </div>
             </div>
@@ -279,14 +191,6 @@ const ProfilePage = () => {
     </div>
   );
 };
-
-const StatCard = ({ icon, label, value }) => (
-  <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-4 text-center hover:shadow-lg transition-all duration-300 hover:scale-105">
-    <div className="flex justify-center mb-2 text-pink-500">{icon}</div>
-    <div className="text-2xl font-bold text-gray-800 mb-1">{value}</div>
-    <div className="text-sm text-gray-600">{label}</div>
-  </div>
-);
 
 const FloatingEmojis = () => (
   <>

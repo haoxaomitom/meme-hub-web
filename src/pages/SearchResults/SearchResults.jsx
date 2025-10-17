@@ -1,191 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Search,
   TrendingUp,
   Clock,
   Heart,
-  Eye,
-  ChevronLeft,
-  ChevronRight,
-  Filter,
   X,
   User,
   Image,
   Hash,
-  Flame,
   SlidersHorizontal,
-  ArrowRight,
 } from "lucide-react";
 import MemeCard from "../../components/MemeCard";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
-
-// User Card Component
-const UserCard = ({ user, onClick }) => {
-  return (
-    <div
-      onClick={onClick}
-      className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer"
-    >
-      <div className="flex items-center space-x-4">
-        <img
-          src={user.avatar}
-          alt={user.name}
-          className="w-16 h-16 rounded-full border-4 border-pink-100"
-        />
-        <div className="flex-1">
-          <h3 className="font-bold text-gray-800 text-lg">{user.name}</h3>
-          <p className="text-gray-500 text-sm">@{user.username}</p>
-        </div>
-      </div>
-      <div className="mt-4 grid grid-cols-2 gap-4">
-        <div className="bg-pink-50 rounded-xl p-3 text-center">
-          <p className="text-xl font-bold text-pink-600">{user.memes}</p>
-          <p className="text-xs text-gray-600">Memes</p>
-        </div>
-        <div className="bg-purple-50 rounded-xl p-3 text-center">
-          <p className="text-xl font-bold text-purple-600">{user.followers}</p>
-          <p className="text-xs text-gray-600">Followers</p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Filter Chip Component
-const FilterChip = ({ label, isActive, onClick, icon: Icon }) => {
-  return (
-    <button
-      onClick={onClick}
-      className={`flex items-center space-x-2 px-4 py-2 rounded-full font-medium transition-all duration-200 text-sm ${
-        isActive
-          ? "bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg scale-105"
-          : "bg-white text-gray-700 border-2 border-gray-200 hover:border-pink-300 hover:bg-pink-50"
-      }`}
-    >
-      {Icon && <Icon size={16} />}
-      <span>{label}</span>
-    </button>
-  );
-};
-
-// View All Button Component
-const ViewAllButton = ({ count, onClick }) => {
-  return (
-    <button
-      onClick={onClick}
-      className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl hover:from-pink-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-    >
-      <span className="font-medium">View All {count}</span>
-      <ArrowRight size={18} />
-    </button>
-  );
-};
-
-// Section Header Component
-const SectionHeader = ({ title, count, showViewAll, onViewAll }) => {
-  return (
-    <div className="flex items-center justify-between mb-6">
-      <div>
-        <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
-        <p className="text-gray-600 mt-1">{count} results found</p>
-      </div>
-      {showViewAll && (
-        <ViewAllButton count={count} onClick={onViewAll} />
-      )}
-    </div>
-  );
-};
-
-// Pagination Component
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  const getPageNumbers = () => {
-    const pages = [];
-    const maxVisible = 5;
-    let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
-    let endPage = Math.min(totalPages, startPage + maxVisible - 1);
-
-    if (endPage - startPage < maxVisible - 1) {
-      startPage = Math.max(1, endPage - maxVisible + 1);
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      pages.push(i);
-    }
-
-    return { pages, startPage, endPage };
-  };
-
-  const { pages, startPage, endPage } = getPageNumbers();
-
-  return (
-    <div className="flex items-center justify-center space-x-2 mt-12">
-      <button
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        className={`p-2 rounded-xl transition-all ${
-          currentPage === 1
-            ? "text-gray-300 cursor-not-allowed"
-            : "text-gray-700 hover:bg-pink-100 hover:text-pink-500"
-        }`}
-      >
-        <ChevronLeft size={20} />
-      </button>
-
-      {startPage > 1 && (
-        <>
-          <button
-            onClick={() => onPageChange(1)}
-            className="w-10 h-10 rounded-xl hover:bg-pink-100 hover:text-pink-500 transition-all font-medium text-gray-700"
-          >
-            1
-          </button>
-          {startPage > 2 && <span className="text-gray-400 px-1">...</span>}
-        </>
-      )}
-
-      {pages.map((page) => (
-        <button
-          key={page}
-          onClick={() => onPageChange(page)}
-          className={`w-10 h-10 rounded-xl font-medium transition-all ${
-            currentPage === page
-              ? "bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg"
-              : "text-gray-700 hover:bg-pink-100 hover:text-pink-500"
-          }`}
-        >
-          {page}
-        </button>
-      ))}
-
-      {endPage < totalPages && (
-        <>
-          {endPage < totalPages - 1 && (
-            <span className="text-gray-400 px-1">...</span>
-          )}
-          <button
-            onClick={() => onPageChange(totalPages)}
-            className="w-10 h-10 rounded-xl hover:bg-pink-100 hover:text-pink-500 transition-all font-medium text-gray-700"
-          >
-            {totalPages}
-          </button>
-        </>
-      )}
-
-      <button
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        className={`p-2 rounded-xl transition-all ${
-          currentPage === totalPages
-            ? "text-gray-300 cursor-not-allowed"
-            : "text-gray-700 hover:bg-pink-100 hover:text-pink-500"
-        }`}
-      >
-        <ChevronRight size={20} />
-      </button>
-    </div>
-  );
-};
+import SectionHeader from "./components/SectionHeader";
+import FilterChip from "./components/FilterChip";
+import Pagination from "./components/Pagination";
+import UserCard from "./components/UserCard";
+import { SEARCH_RESULTS } from "../../utils/constants";
+import ItemTag from "./components/ItemTag";
 
 // Main Search Results Page Component
 const SearchResultsPage = () => {
@@ -197,119 +30,7 @@ const SearchResultsPage = () => {
   const totalPages = 8;
 
   // Mock search results data
-  const searchResults = {
-    memes: [
-      {
-        id: 1,
-        title: "Funny cat doing backflip",
-        image:
-          "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&h=800&fit=crop",
-        author: "CatLover",
-        authorAvatar:
-          "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop",
-        likes: 3421,
-        views: "45.2K",
-        isTrending: true,
-      },
-      {
-        id: 2,
-        title: "Cats vs cucumbers compilation",
-        image:
-          "https://images.unsplash.com/photo-1573865526739-10c1dd7aa5a7?w=800&h=800&fit=crop",
-        author: "FelineFunny",
-        authorAvatar:
-          "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop",
-        likes: 2876,
-        views: "38.7K",
-        isTrending: false,
-      },
-      {
-        id: 3,
-        title: "When your cat judges you",
-        image:
-          "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800&h=800&fit=crop",
-        author: "MeowMemes",
-        authorAvatar:
-          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
-        likes: 4521,
-        views: "52.3K",
-        isTrending: true,
-      },
-      {
-        id: 4,
-        title: "Hilarious cat reactions",
-        image:
-          "https://images.unsplash.com/photo-1559235038-1a4f5cf91135?w=800&h=800&fit=crop",
-        author: "KittyKing",
-        authorAvatar:
-          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
-        likes: 1987,
-        views: "28.4K",
-        isTrending: false,
-      },
-      {
-        id: 5,
-        title: "Cats being weird",
-        image:
-          "https://images.unsplash.com/photo-1571988840298-3b5301d5109b?w=800&h=800&fit=crop",
-        author: "PurrfectMemes",
-        authorAvatar:
-          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
-        likes: 3654,
-        views: "41.9K",
-        isTrending: false,
-      },
-      {
-        id: 6,
-        title: "Cat logic explained",
-        image:
-          "https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=800&h=800&fit=crop",
-        author: "WhiskerWisdom",
-        authorAvatar:
-          "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop",
-        likes: 2198,
-        views: "32.1K",
-        isTrending: false,
-      },
-    ],
-    users: [
-      {
-        id: 1,
-        name: "Cat Lover",
-        username: "catlover",
-        avatar:
-          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop",
-        memes: 342,
-        followers: "12.5K",
-      },
-      {
-        id: 2,
-        name: "Feline Funny",
-        username: "felinefunny",
-        avatar:
-          "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&h=100&fit=crop",
-        memes: 198,
-        followers: "8.7K",
-      },
-      {
-        id: 3,
-        name: "Meow Master",
-        username: "meowmaster",
-        avatar:
-          "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=100&h=100&fit=crop",
-        memes: 156,
-        followers: "6.3K",
-      },
-    ],
-    tags: [
-      { id: 1, name: "funny-cats", count: "1.2K posts" },
-      { id: 2, name: "cat-memes", count: "987 posts" },
-      { id: 3, name: "cats", count: "2.5K posts" },
-      { id: 4, name: "funny-animals", count: "876 posts" },
-      { id: 5, name: "pet-humor", count: "654 posts" },
-      { id: 6, name: "cat-life", count: "543 posts" },
-    ],
-  };
+  const searchResults = SEARCH_RESULTS;
 
   const tabs = [
     { id: "all", label: "All", count: 1543, icon: Image },
@@ -317,7 +38,6 @@ const SearchResultsPage = () => {
     { id: "users", label: "Users", count: 234, icon: User },
     { id: "tags", label: "Tags", count: 20, icon: Hash },
   ];
-
   const filters = [
     { id: "relevant", label: "Most Relevant" },
     { id: "recent", label: "Most Recent", icon: Clock },
@@ -516,19 +236,7 @@ const SearchResultsPage = () => {
               <div className="bg-white rounded-2xl shadow-md p-6">
                 <div className="flex flex-wrap gap-3">
                   {limitedResults.tags.map((tag) => (
-                    <button
-                      key={tag.id}
-                      onClick={() => console.log("Tag clicked:", tag.name)}
-                      className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-pink-50 to-purple-50 hover:from-pink-100 hover:to-purple-100 border-2 border-pink-200 rounded-xl transition-all"
-                    >
-                      <Hash size={16} className="text-pink-500" />
-                      <span className="font-medium text-gray-800">
-                        {tag.name}
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        ({tag.count})
-                      </span>
-                    </button>
+                    <ItemTag key={tag.id} {...tag} />
                   ))}
                 </div>
               </div>
@@ -539,11 +247,7 @@ const SearchResultsPage = () => {
         {/* Individual Tab Views */}
         {activeTab === "memes" && (
           <>
-            <SectionHeader
-              title="Memes"
-              count="1,289"
-              showViewAll={false}
-            />
+            <SectionHeader title="Memes" count="1,289" showViewAll={false} />
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {searchResults.memes.map((meme) => (
                 <MemeCard
@@ -563,11 +267,7 @@ const SearchResultsPage = () => {
 
         {activeTab === "users" && (
           <>
-            <SectionHeader
-              title="Users"
-              count="234"
-              showViewAll={false}
-            />
+            <SectionHeader title="Users" count="234" showViewAll={false} />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {searchResults.users.map((user) => (
                 <UserCard
@@ -604,9 +304,7 @@ const SearchResultsPage = () => {
                     <span className="font-medium text-gray-800">
                       {tag.name}
                     </span>
-                    <span className="text-sm text-gray-500">
-                      ({tag.count})
-                    </span>
+                    <span className="text-sm text-gray-500">({tag.count})</span>
                   </button>
                 ))}
               </div>
