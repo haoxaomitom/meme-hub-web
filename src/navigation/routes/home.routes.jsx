@@ -10,6 +10,7 @@ import TrendingPage from "../../pages/Trending/TrendingPage";
 import TopContributorsPage from "../../pages/TopContributors/TopContributors";
 import SearchResultsPage from "../../pages/SearchResults/SearchResults";
 import TagDetailPage from "../../pages/TagDetail/TagDetail";
+import TagNamePage from "../../pages/TagName";
 
 const homeRoutes = [
   {
@@ -25,7 +26,8 @@ const homeRoutes = [
       { path: "trending", element: <TrendingPage /> },
       { path: "top-contributors", element: <TopContributorsPage /> },
       { path: "search-result", element: <SearchResultsPage /> },
-      { path: "tag-detail", element: <TagDetailPage /> }
+      { path: "tag-detail", element: <TagDetailPage /> },
+      { path: "tag-name", element: <TagNamePage /> },
     ],
   },
 ];
