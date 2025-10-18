@@ -13,3 +13,14 @@
 .animate-fadeIn {
   animation: fadeIn 0.2s ease-in-out;
 }
+
+/* Ẩn thanh cuộn (Chrome, Safari, Edge) */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ẩn thanh cuộn (Firefox) */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}

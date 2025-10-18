@@ -112,7 +112,7 @@ const MemeDetailPage = () => {
         <div className="w-full max-w-7xl px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mt-6">
             {/* Meme Section */}
-            <div className="lg:col-span-5 flex flex-col items-center">
+            <div className="lg:col-span-5 flex flex-col items-center max-h-[calc(200vh-8rem)]">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -203,7 +203,7 @@ const MemeDetailPage = () => {
             </div>
 
             {/* Comments Section */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-7 rounded-3xl max-h-[calc(200vh-8rem)] overflow-y-auto hide-scrollbar">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
